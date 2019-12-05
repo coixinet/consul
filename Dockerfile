@@ -40,6 +40,7 @@ RUN gem install bundler
 
 # Finish establishing our Ruby environment
 RUN bundle update
+
 RUN bundle install --full-index
 
 # Install Chromium and ChromeDriver for E2E integration tests
