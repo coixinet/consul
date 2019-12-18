@@ -52,10 +52,11 @@ RUN mv -f chromedriver /usr/local/share/chromedriver
 RUN ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
 RUN ln -s /usr/local/share/chromedriver /usr/bin/chromedriver
 
-# Copy the Rails application into place
-COPY . .
+WORKDIR /var/www/consul
 
-# Define the script we want run once the container boots
-# Use the "exec" form of CMD so our script shuts down gracefully on SIGTERM (i.e. `docker stop`)
-# CMD [ "config/containers/app_cmd.sh" ]
-CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
+# Copy the Rails application into place
+COPY . /var/www/consul
+
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+#CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
+CMD ["bundle", "exec", "rails", "s", "-p","3000", "-b", "0.0.0.0"]
