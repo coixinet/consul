@@ -39,7 +39,7 @@ COPY Gemfile_custom Gemfile_custom
 RUN gem install bundler
 
 # Finish establishing our Ruby environment
-RUN bundle update
+RUN bundle
 
 RUN bundle install --full-index
 
@@ -51,8 +51,6 @@ RUN chmod +x chromedriver
 RUN mv -f chromedriver /usr/local/share/chromedriver
 RUN ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
 RUN ln -s /usr/local/share/chromedriver /usr/bin/chromedriver
-
-WORKDIR /var/www/consul
 
 # Copy the Rails application into place
 COPY . /var/www/consul
